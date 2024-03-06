@@ -1,0 +1,121 @@
+import { useContext, useRef } from "react";
+import { PostListContext } from "../store/post-store";
+import { useNavigate } from "react-router-dom";
+
+function CreatePost() {
+  const { addPost } = useContext(PostListContext);
+  const navigate = useNavigate();
+
+  const userIDRef = useRef();
+  const postTitleRef = useRef();
+  const postBodyRef = useRef();
+  const postReactionRef = useRef();
+  const postTagREf = useRef();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const userId = userIDRef.current.value;
+    const postTitle = postTitleRef.current.value;
+    const postBody = postBodyRef.current.value;
+    const reactions = postReactionRef.current.value;
+    const tags = postTagREf.current.value.split(" ");
+
+    userIDRef.current.value = "";
+    postTitleRef.current.value = "";
+    postBodyRef.current.value = "";
+    postReactionRef.current.value = "";
+    postTagREf.current.value = "";
+
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: postTitle,
+        body: postBody,
+        userId: userId,
+        reactions: reactions,
+        tags: tags,
+      }),
+    })
+      .then((res) => res.json())
+      .then((post) => {
+        addPost(post);
+        navigate("/"); 
+      });
+
+    //faddPost(userId, postTitle, postBody, reactions, tags);
+  };
+
+  return (
+    <form className="createPost" onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label for="exampleIputEmail1" className="form-label">
+          UserId
+        </label>
+        <input
+          ref={userIDRef}
+          type="text"
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="exampleIputEmail1" className="form-label">
+          Post Title
+        </label>
+        <input
+          type="text"
+          ref={postTitleRef}
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="exampleIputEmail1" className="form-label">
+          Write Something
+        </label>
+        <textarea
+          rows={4}
+          type="text"
+          ref={postBodyRef}
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="what are you feeling today..."
+        />
+      </div>
+      <div className="mb-3">
+        <label for="exampleIputEmail1" className="form-label">
+          Reactions
+        </label>
+        <input
+          type="text"
+          ref={postReactionRef}
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="exampleIputEmail1" className="form-label">
+          Tags
+        </label>
+        <input
+          type="text"
+          ref={postTagREf}
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="please write your tags with space"
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  );
+}
+
+export default CreatePost;

@@ -1,0 +1,14 @@
+{
+  "name": "reduxoverview",
+  "version": "1.0.0",
+  "description": "This is my separate file for redux understanding",
+  "main": "firstredux.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhishek Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^5.0.1"
+  }
+}
