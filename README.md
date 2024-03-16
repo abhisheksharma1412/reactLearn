@@ -6,13 +6,6 @@ Welcome to my React and Redux Learning Journey repository built with Vite!
 
 This repository documents my learning journey in mastering React.js and Redux.js with the help of Vite, a lightning-fast frontend build tool for React projects. Each project within this repository explores different concepts and features of React and Redux, demonstrating my progress and growth as a frontend developer.
 
-## Projects Overview
-
-- **Project 1**: [Brief description of project 1]
-- **Project 2**: [Brief description of project 2]
-- **Project 3**: [Brief description of project 3]
-- ...
-
 ## Technologies Used
 
 - React.js
